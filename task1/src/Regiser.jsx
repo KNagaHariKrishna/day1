@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import axios from 'axios';
+// import axios from 'axios';
 import { Link, Outlet } from "react-router-dom";
 
 function Regiser() {
@@ -8,6 +8,7 @@ function Regiser() {
   const [age,setAge]=useState("")
   const [mobnum,setMobum]=useState("")
   const [password,setPassword]=useState("")
+
   const handleRegisteruser=()=>{
     const formData = new FormData()
     formData.append("username", username)
@@ -15,12 +16,17 @@ function Regiser() {
     formData.append("mobnum", mobnum)
     formData.append("password", password)
 
+    // console.log(localStorage.getItem('jwt'));
+    // let tok = localStorage.getItem("token")
+
     fetch("http://localhost:5000/register", {
-      // headers: { 'content-type': 'application/json' },
       method: 'POST',
-            // body:new URLSearchParams(formData).toString(),
-      body: formData,
-    })
+      body: new URLSearchParams(formData).toString(),
+      headers: {
+        // "Authorization": tok,
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    },)
   }
   return (
     <>
