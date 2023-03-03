@@ -85,11 +85,7 @@ app.post("/login",async (req,res)=>{
             })
         }
         if (result) {
-
-            const { username, age, mobnum } = user
-
             const {username,age}=user
-
             const token = jwt.sign({
                 exp: Math.floor(Date.now() / 1000) + (60 * 60),
                 data: user._id
@@ -99,11 +95,7 @@ app.post("/login",async (req,res)=>{
                 status: "Succces",
                 message: "Login successful",
                 token,
-
-                user:{username,age,mobnum}
-
                 user:{username,age}
-
             })
         } else {
             return res.status(400).json({

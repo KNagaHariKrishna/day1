@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 // import axios from 'axios';'react-router-dom'
-// import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet } from "react-router-dom"
 // import UserDetails from './UserDetails';
 // import { createContext, useContext } from "react";
 // const UserContext = createContext();
@@ -9,19 +9,11 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-
-  // const [userdata, setUserdata] = useState("")
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState("")
-  const [response, setResponse] = useState([]);
-  const handleLogin = async (e) => {
-
   const [userdata, setUserdata] = useState("")
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState("")
   const [response, setResponse] = useState([]);
   const handleLogin =  async (e) => {
-
     // e.preventDefault()
     const formData = new FormData()
     formData.append("username", username)
@@ -54,22 +46,15 @@ function Login() {
         username,
         password,
       }),
-
+      
     });
     const data = await resp.json();
     console.log(data);
     if (data.token) {
-
-      localStorage.setItem("jwt", data.token)
-      localStorage.setItem("user", JSON.stringify(data.user))
-      // window.location.href = '/landing'
-      navigate('/UserDetails');
-
         localStorage.setItem("jwt", data.token)
         localStorage.setItem("user", JSON.stringify(data.user))
         // window.location.href = '/landing'
         navigate('/UserDetails');
-
     }
     setResponse(data);
     console.log(response.message === "Login Successful");
@@ -78,20 +63,11 @@ function Login() {
   }
 
   return (
-    <div className='container'>
+    <>
       <label htmlFor="userName">userName</label>
       <input type="text" name="" id="userName" value={username} onChange={(e) => setUsername(e.target.value)} />
       <label htmlFor="password">password</label>
       <input type="text" name="" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-
-      <button className='btnlogin' onClick={handleLogin}>Login</button>
-      <div id="mess">
-        {response.message ? (
-          <div style={{ color: "red" }}>{response.message}</div>
-        ) : null}
-      </div>
-    </div>
-
         <button onClick={handleLogin}>Login</button>
         <div id="mess">
               {response.message ? (
@@ -99,7 +75,6 @@ function Login() {
               ) : null}
             </div>
     </>
-
   )
 }
 
