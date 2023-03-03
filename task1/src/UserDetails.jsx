@@ -1,39 +1,35 @@
-import React, { useState } from 'react'
-// import { createContext, useContext } from "react";
 import "./App.css"
-
+import { Link, Outlet } from "react-router-dom";
 
 // const UserContext = createContext();
 function UserDetails() {
 
-  // const user = useContext(UserContext)
-  // console.log(user);
-  // const [a,seta]=useState("")
+  const logout=()=>{
+    localStorage.clear();
+  } 
 
-  // const showUser=()=>{
-  //   fetch(`http://localhost:5000/userdetails?username=${user}`)
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       seta(data)
-  //       console.log(a);
-  //     });
-  // }
-
+  const data = localStorage.getItem("user")
+  const user = JSON.parse(data)
+  // console.log(JSON.parse(data));
   return (
     <>
       <div className='header'>
         <h4>LOGO</h4>
-        <div>
-          <span className='name'>Name</span>
+        <div className='profile'>
+          <span className='name'>{user?user.username:null}</span>
           <img src="https://cdn-icons-png.flaticon.com/512/64/64572.png" alt="profileimg" />
         </div>
       </div>
       <div className='body'>
-        mobile num:-
+        mobile num:-{user?user.mobnum:null}
         <br />
-        age:- 
+        age:- {user?user.age:null}
+        <div>
+          <Link to={"/Login"}>
+            <button className="btnlogout" onClick={logout}>Logout</button>
+          </Link>
+          <Outlet />
+        </div>
       </div>
     </>
   )

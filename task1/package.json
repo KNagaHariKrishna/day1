@@ -9,6 +9,7 @@
     "FormData": "^0.10.1",
     "axios": "^1.3.4",
     "localstorage": "^1.0.1",
+    "navigate": "^0.3.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.8.2",
